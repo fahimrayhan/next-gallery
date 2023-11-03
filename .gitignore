@@ -11,6 +11,8 @@
 # production
 /build
 
+./Old.jsx
+
 # misc
 .DS_Store
 .env.local
