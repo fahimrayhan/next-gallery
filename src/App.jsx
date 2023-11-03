@@ -111,9 +111,9 @@ function App() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-slate-200 p-10">
-      <div className="image-container border rounded-md bg-white w-10/12 h-fit">
-        <div className="image-container-head py-5 px-10 border-b flex items-center justify-between">
+    <div className="flex justify-center items-center min-h-screen bg-slate-200 ">
+      <div className="image-container border rounded-md bg-white  w-8/12">
+        <div className="image-container-head py-5 px-8 border-b flex items-center justify-between">
           <h1 className="text-xl font-bold text-gray-600 whitespace-nowrap">
             {selected.length > 0 ? (
               <div className="flex items-center">
@@ -149,7 +149,7 @@ function App() {
           )}
         </div>
 
-        <div className="p-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
+        <div className="p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
           {/* Draggable divs */}
           {file.length > 0 &&
             file.map((file, index) => (
@@ -168,7 +168,7 @@ function App() {
                 onDragEnd={(e) =>{HandleSortImage(e,index)}}
                 onDrop={(e) =>{ handleDropEvent(e,index)}} // for handling the after drag event
                 key={index}
-                className={`border-2 rounded-md ${
+                className={`border-2  border-gray-300 rounded-md ${
                   index === 0 ? "w-full xs:w-96 xs:h-96 col-span-2 row-span-2" : " w-full xs:w-44 xs:h-44"
                   } relative overflow-hidden `}
               >
@@ -211,21 +211,24 @@ function App() {
             onDrop={handleDrop}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
-            className="p-4 border-dashed border-2 border-gray-300 rounded-md w-full flex flex-col justify-center items-center bg-slate-100 cursor-pointer"
+            className="flex items-center justify-center w-full xs:w-44 xs:h-44"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 xs:w-4 xs:h-4">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-            </svg>
-
-
-            <label className="mt-3 cursor-pointer hover:border-blue-300 hover:text-blue-400 bg-white px-4 h-9 inline-flex items-center rounded border border-gray-300 shadow-sm text-sm font-medium text-gray-700 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500 whitespace-nowrap">
-              Add images
+            <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-44 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer p-2">
+            
+            <div className="flex flex-col items-center justify-center ">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="mb-2 w-8 h-8 xs:w-4 xs:h-4">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+              </svg>
+              <p class="text-sm text-gray-500 dark:text-gray-400 whitespace-normal text-center"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+            </div>
               <input
                 onChange={handleImageUpload}
                 type="file"
-                className="sr-only"
+                className="hidden"
                 accept="image/*"
+                id="dropzone-file" 
                 multiple
+                
               />
             </label>
           </div>
