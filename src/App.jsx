@@ -93,7 +93,7 @@ function App() {
     <div className="flex justify-center items-center min-h-screen bg-slate-200 p-10">
       <div className="image-container border rounded-md bg-white w-10/12 h-fit">
         <div className="image-container-head py-5 px-10 border-b flex items-center justify-between">
-          <h1 className="text-xl font-bold text-gray-600">
+          <h1 className="text-xl font-bold text-gray-600 whitespace-nowrap">
             {selected.length > 0 ? (
               <div className="flex items-center">
                 <svg
@@ -102,7 +102,7 @@ function App() {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className={`w-5 h-5 mr-5 text-white bg-blue-600  ${
+                  className={`w-5 h-5 mr-2 text-white bg-blue-600  ${
                     selected.length > 0 ? "" : "hidden"
                   }`}
                 >
@@ -121,7 +121,7 @@ function App() {
           {selected.length > 0 && (
             <h1
               onClick={HandleDelete}
-              className="text-red-500 font-semibold cursor-pointer border border-white hover:border-red-500 rounded-md px-2"
+              className="text-red-500 font-semibold cursor-pointer border border-white hover:border-red-500 rounded-md mx-4 px-1 whitespace-nowrap"
             >
               Delete files
             </h1>
@@ -190,14 +190,12 @@ function App() {
             onDrop={handleDrop}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
-            className={`add-button p-3 border-2 rounded-md border-dashed w-full  xs:w-44 h-44 flex flex-col justify-center items-center bg-slate-50 cursor-pointer `}
+            className={` p-8 border-dashed border-2 border-gray-400 rounded-md w-full  xs:w-50 xs:h-50 flex flex-col justify-center items-center bg-gray-200 cursor-pointer `}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 xs:w-4 xs:h-4">
               <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
             </svg>
-
-            
-            <label className="mt-3 cursor-pointer hover:border-blue-300 hover:text-blue-400 bg-white px-4 h-9 inline-flex items-center rounded border border-gray-300 shadow-sm text-sm font-medium text-gray-700 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+            <label className="mt-3 cursor-pointer px-4 h-9 inline-flex items-center whitespace-nowrap">
               Add images
               <input
                 onChange={(e) => {
