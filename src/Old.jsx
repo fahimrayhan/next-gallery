@@ -1,20 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 function App() {
-
   const [file, setFile] = useState([]); // used to store image files
   const [hover, setHover] = useState(null); // used for having specific hovering effect
   const [selected, setSelected] = useState([]); // used for storing the selected image for deletion
   const DraggedItem = useRef(null);
   const PlacePoint = useRef(null);
-
-  const imagesPath = process.env.PUBLIC_URL + '/images/';
-
-    useEffect(() => {
-        // List the images in the public/images folder
-        const imageFiles = ['image-1.webp', 'image-2.webp', 'image-3.webp', 'image-4.webp', 'image-5.webp', 'image-6.webp', 'image-7.webp', 'image-8.webp', 'image-9.webp', 'image-10.jpeg', 'image-11.jpeg']; 
-        setFile(imageFiles);
-     }, []);
 
 
   // file drag & drop functions
@@ -24,12 +15,12 @@ function App() {
   }
   // Function to handle drag over event
   const handleDragOver = (e,index) => {
-    e.preventDefault(); 
+    e.preventDefault(); // Prevent the default behavior
 
     // Check if e.currentTarget is a valid DOM element
     if (e.currentTarget) {
       // Add a drop shadow when hovering
-      e.currentTarget.style.boxShadow = '0 10px 20px rgba(24, 50, 0, 0.3)';
+      e.currentTarget.style.boxShadow = '0 10px 20px rgba(24, 50, 0, 0.3)'; // Customize the shadow as needed
     }
   };
 
@@ -55,22 +46,10 @@ function App() {
   // Adding new image functionalities
  
   // Function to handle drop images
-
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    setFile((prevFile) => [...prevFile, file.name]);
-
-  };
-  
-// Dropping multiple images
   const handleDrop = (e) => {
     e.preventDefault(); // Prevent files from opening in the browser
      
-    const droppedFiles = e.dataTransfer.files;
-
-    // Simulate the upload process by adding the dropped files to the list of images
-    const newFiles = Array.from(droppedFiles).map((file) => file.name);
-    setFile((prevFile) => [...prevFile, ...newFiles]);
+    setFile((prevFile) => [...prevFile, ...e.dataTransfer.files]);
   };
 
   // sorting function
@@ -202,7 +181,7 @@ function App() {
                     />
                   </svg>
                 </div>
-                <img src={imagesPath + file} alt=""/>
+                <img src={URL.createObjectURL(file)} alt=""/>
               </div>
             ))}
 
@@ -211,7 +190,7 @@ function App() {
             onDrop={handleDrop}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
-            className="p-4 border-dashed border-2 border-gray-300 rounded-md w-full flex flex-col justify-center items-center bg-slate-100 cursor-pointer"
+            className=" p-8 border-dashed border-2 border-gray-300 rounded-md w-full  xs:w-44 h-44 flex flex-col justify-center items-center bg-slate-100 cursor-pointer"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 xs:w-4 xs:h-4">
               <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
@@ -221,10 +200,11 @@ function App() {
             <label className="mt-3 cursor-pointer hover:border-blue-300 hover:text-blue-400 bg-white px-4 h-9 inline-flex items-center rounded border border-gray-300 shadow-sm text-sm font-medium text-gray-700 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500 whitespace-nowrap">
               Add images
               <input
-                onChange={handleImageUpload}
+                onChange={(e) => {
+                  setFile((prevFile) => [...prevFile, ...e.target.files]);
+                }}
                 type="file"
                 className="sr-only"
-                accept="image/*"
                 multiple
               />
             </label>
