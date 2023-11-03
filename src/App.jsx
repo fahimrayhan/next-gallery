@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 function App() {
   const [file, setFile] = useState([]); // used to store image files
@@ -7,17 +7,11 @@ function App() {
   const DraggedItem = useRef(null);
   const PlacePoint = useRef(null);
 
-  const imagesPath = process.env.PUBLIC_URL + '/images/';
-
-  useEffect(() => {
-    // List the images in the public/images folder
-    const imageFiles = ['image-1.webp', 'image-2.webp', 'image-3.webp', 'image-4.webp', 'image-5.webp', 'image-6.webp', 'image-7.webp', 'image-8.webp', 'image-9.webp', 'image-10.jpeg', 'image-11.jpeg']; // Replace with your actual image file names
-    setFile(imageFiles);
-  }, []);
 
   // file drag & drop functions
   const handleFirstImage = (e, index)=>{
     DraggedItem.current = index
+  
   }
   // Function to handle drag over event
   const handleDragOver = (e,index) => {
@@ -187,7 +181,7 @@ function App() {
                     />
                   </svg>
                 </div>
-                <img src={imagesPath + file} alt=""/>
+                <img src={URL.createObjectURL(file)} alt=""/>
               </div>
             ))}
 
